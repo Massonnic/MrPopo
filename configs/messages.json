@@ -1,0 +1,76 @@
+{
+    "accueil": [
+        "Salut <@¤> ! ça faisait un bail",
+        "Oh <@¤> ! content de te revoir",
+        "re <@¤>",
+        "Hey <@¤> !",
+        "Regardez qui vouloit ! c'est notre cher <@¤> !"
+    ],
+    "responses": [
+        "A chaque fois que tu me mentionnes, ton penis rétréci de 1mm",
+        "J'en ai rien à faire :/",
+        "Tu n'as pas compris que je t'ignorais ?",
+        "Ok !, maintenant j'aimerai bien que tu te taises",
+        "...",
+        "QUOI !?",
+        "Fait attention à toi, je vais le dire au tout puissant !",
+        "Une mention c'est un vaccin raté de l'unicef",
+        "Tu as perdu 3 secondes de ta vie à me mentionner",
+        "Ce n'est pas faute de t'avoir prevenu",
+        "Je n'ecoute pas les rageux"
+    ],
+    "commands": {
+        "commun": {
+            "error": "Un problème est survenu pendant l'opération...",
+            "arguments_error": "L'argument passé n'est pas correct :/"
+        },
+        "managment": {
+            "status": {
+                "name": "status",
+                "description": "Affiche la situation du serveur",
+                "syntax": "!status",
+                "defaultTextChannel": "Le channel textuel par défaut est ",
+                "defaultVocalChannel": "Le channel vocal par défaut est ",
+                "greeting": "L'annonce de connexion est "
+            },
+            "setdefault": {
+                "name": "setdefault",
+                "description": "Défini le channel dans lequel je posterai mes messages automatiques.",
+                "syntax": "!setdefault (dans le channel cible)",
+                "success": "Le channel par défaut à bien été changé :)",
+                "info": "Ce channel est déjà configuré comme celui par défaut"
+            },
+            "greeting": {
+                "name": "greeting",
+                "description": "Défini si oui ou non je dois accueillir les connexions.",
+                "syntax": "!greeting true|false",
+                "success_true": "Je souhaiterai désormais la bienvenue à la connexion d'un utilisateur.",
+                "success_false": "Je ne souhaiterai plus la bienvenue désormais.",
+                "info_true": "Je souhaite déjà la bienvenue",
+                "info_false": "Je ne souhaite déjà pas la bienvenue"
+            }
+        },
+        "music": {
+            "play": {
+                "name": "play",
+                "description": "Connexion au channel vocal et lecture de musiques",
+                "syntax": "!play url"
+            },
+            "pause": {
+                "name": "pause",
+                "description": "Met en pause la lecture de la musique",
+                "syntax": "!pause"
+            },
+            "resume": {
+                "name": "resume",
+                "description": "Reprend la lecture de la musique",
+                "syntax": "!resume"
+            },
+            "stop": {
+                "name": "stop",
+                "description": "Stop la lecture de musiques et déconnecte le bot",
+                "syntax": "!stop"
+            }
+        }
+    }
+}

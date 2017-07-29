@@ -1,0 +1,12 @@
+{
+    "game": "!help :)",
+    "commands": {
+        "prefix": "!"
+    },
+    "file_content": [
+        "name",
+        "defaultTextChannel",
+        "defaultVocalChannel",
+        "greeting"
+    ]
+}
