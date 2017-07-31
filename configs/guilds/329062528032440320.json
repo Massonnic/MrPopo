@@ -2,5 +2,5 @@
     "name": "plopiplot",
     "defaultTextChannel": "329062528032440320",
     "defaultVocalChannel": "329062528032440322",
-    "greeting": false
+    "greeting": "true"
 }

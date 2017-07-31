@@ -90,19 +90,19 @@ module.exports = class Register {
         switch (missing)
         {
             case "name":
-                newGuild += "\"name\": \""+guild.name+"\""
+                newGuild += `"name": "${guild.name}"`
             break
             
             case "defaultTextChannel":
-                newGuild += "\"defaultTextChannel\": \""+tc[0].id+"\""
+                newGuild += `"defaultTextChannel": "${tc[0].id}"`
             break
 
             case "defaultVocalChannel":
-                newGuild += "\"defaultVocalChannel\": \""+vc[0].id+"\""
+                newGuild += `"defaultVocalChannel": "${vc[0].id}"`
             break
 
             case "greeting":
-                newGuild += "\"greeting\": "+false
+                newGuild += `"greeting": "false"`
             break
         }
         newGuild += "} "
@@ -123,10 +123,10 @@ module.exports = class Register {
 
         let newGuild = `
         { 
-            "name": "`+guild.name+`",
-            "defaultTextChannel": "`+tc[0].id+`",
-            "defaultVocalChannel": "`+vc[0].id+`",
-            "greeting": false
+            "name": "${guild.name}",
+            "defaultTextChannel": "${tc[0].id}",
+            "defaultVocalChannel": "${vc[0].id}",
+            "greeting": "false"
         }`
 
         newGuild = JSON.parse(newGuild)

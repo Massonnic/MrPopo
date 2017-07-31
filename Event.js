@@ -42,7 +42,7 @@ module.exports = class Event {
                 
                 let defaultTextChannel = Config.getDefaultTextChannel(newMember.guild)
                 let greeting = Config.getGreeting(newMember.guild)
-
+                
                 if (defaultTextChannel && greeting)
                 {
                     this.message.channel = newMember.guild.channels.get(defaultTextChannel)
