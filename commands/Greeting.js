@@ -8,13 +8,13 @@ module.exports = class Greeting
     {
         this.params = params
         this.message = message
-        this.guild = message.guild.id
+        this.guild = message.guild
         this.changeGreeting()
     }
 
     changeGreeting()
     {
-        let path = "configs/guilds/"+this.guild+".json"
+        let path = "configs/guilds/"+this.guild.id+".json"
         const config = require("../"+path)
         this.params = this.params[0]
 
