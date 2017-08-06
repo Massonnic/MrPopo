@@ -1,5 +1,5 @@
-const fs = require('fs')
 const messages = require('../configs/messages.json')
+const Config = require('../configs/Config')
 
 module.exports = class Status
 {
@@ -14,12 +14,9 @@ module.exports = class Status
 
     getParams()
     {
-        let path = './configs/guilds/'+this.guild.id+'.json'
-        fs.readFile(path, 'utf8', (err, data) => {
-            if (err) throw err
-            data = JSON.parse(data)
-
-            this.send(data)
+        Config.getRow(this.guild)
+        .then((results) => {
+            this.send(results)
         })
     }
 

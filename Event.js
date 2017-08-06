@@ -1,5 +1,4 @@
 const messages = require('./configs/messages.json')
-const Register = require('./configs/Register')
 const Messages = require('./configs/Messages')
 const Config = require('./configs/Config')
 const Commands = require('./commands/Commands')
@@ -17,11 +16,23 @@ module.exports = class Event {
     {
         this.client.on('ready', () => {
             this.client.user.setGame(Config.conf().game)
-            new Register(this.client)
+            for (let guild of this.client.guilds.array())
+            {
+                console.log(guild)
+                Config.getRow(guild)
+                .then((results) => {
+                    if (results == undefined)
+                        Config.newRow(guild)
+                })
+            }
         })
 
-        this.client.on('guildCreate', () => {
-            new Register(this.client)
+        this.client.on('guildCreate', (guild) => {
+            Config.newRow(guild)
+        })
+
+        this.client.on('guildDelete', (guild) => {
+            Config.removeRow(guild)
         })
 
         this.client.on('message', (message) => {
@@ -39,15 +50,17 @@ module.exports = class Event {
             if (oldMember.presence.status == 'offline' && newMember.presence.status == 'online')
             {
                 if (newMember.user.bot == true) { return }
-                
-                let defaultTextChannel = Config.getDefaultTextChannel(newMember.guild)
-                let greeting = Config.getGreeting(newMember.guild)
-                
-                if (defaultTextChannel && greeting)
-                {
-                    this.message.channel = newMember.guild.channels.get(defaultTextChannel)
-                    return this.message.channel.send(Messages.getGreeting(newMember))
-                }
+                Config.getDefaultTextChannel(newMember.guild)
+                .then((resolve) => {
+                    this.message.channel = newMember.guild.channels.get(resolve)
+                })
+                Config.getGreeting(newMember.guild)
+                .then((resolve) => {
+                    let greeting = resolve
+                    
+                    if (greeting)
+                        this.message.channel.send(Messages.getGreeting(newMember))
+                })
             }
 
         })

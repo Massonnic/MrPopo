@@ -8,7 +8,7 @@ let _connection, streamDispatcher
 module.exports = class Play
 {
     
-    constructor(message, params)
+    constructor(message, params) //a changer
     {
         const conf = require('../configs/guilds/'+message.guild.id+'.json')
         this.message = message

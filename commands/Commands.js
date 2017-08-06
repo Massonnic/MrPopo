@@ -1,5 +1,4 @@
 const config = require('../configs/config.json')
-const fs = require('fs')
 
 module.exports = class Commands 
 {
@@ -15,7 +14,7 @@ module.exports = class Commands
         }
         catch (error)
         {
-            //console.log(error)
+            console.log(error)
         }
     }
 

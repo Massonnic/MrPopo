@@ -1,5 +1,5 @@
 const message = require('../configs/messages.json')
-const fs = require('fs')
+const Config = require('../configs/Config')
 
 module.exports = class Greeting
 {
@@ -14,29 +14,32 @@ module.exports = class Greeting
 
     changeGreeting()
     {
-        let path = "configs/guilds/"+this.guild.id+".json"
-        const config = require("../"+path)
         this.params = this.params[0]
+        this.params == 'true' ? this.params = true : this.params == 'false' ? this.params = false : this.params
 
-        if (this.params == config.greeting && this.params == 'true')
-            return this.message.reply(message.commands.managment.greeting.info_true)
-        else if(this.params == config.greeting && this.params == 'false')
-            return this.message.reply(message.commands.managment.greeting.info_false)
-        else if(this.params != 'true' && this.params != 'false')
-            return this.message.reply(message.commands.managment.greeting.error + ' ' + message.commands.managment.greeting.arguments_error)
+        let m = message.commands.managment.greeting
+        let e = message.commands.commun
 
-        config.greeting = this.params
-            
-        fs.writeFile("./"+path, JSON.stringify(config, null, 4), (err) => {
-            if (err)
+        Config.getGreeting(this.guild)
+        .then((resolve) => {
+            if ((!resolve && this.params) || (resolve && !this.params))
             {
-                this.message.reply(message.commands.managment.greeting.error)
-                throw err
+                Config.setGreeting(this.guild, this.params)
+                .then((results) => {
+                    if (this.params)
+                        this.message.reply(m.success_true)
+                    else
+                        this.message.reply(m.success_false)
+                }).catch(() => {
+                    this.message.reply(e.error)
+                })
             }
-            if (this.params == 'true')
-                return this.message.reply(message.commands.managment.greeting.success_true)
+            else if (resolve == this.params && this.params)
+                this.message.reply(m.info_true)
+            else if (resolve == this.params && !this.params)
+                this.message.reply(m.info_false)
             else
-                return this.message.reply(message.commands.managment.greeting.success_false)
+                this.message.reply(e.arguments_error)
         })
     }
 
