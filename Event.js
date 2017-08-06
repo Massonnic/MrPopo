@@ -18,7 +18,6 @@ module.exports = class Event {
             this.client.user.setGame(Config.conf().game)
             for (let guild of this.client.guilds.array())
             {
-                console.log(guild)
                 Config.getRow(guild)
                 .then((results) => {
                     if (results == undefined)
