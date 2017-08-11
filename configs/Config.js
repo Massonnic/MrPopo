@@ -1,8 +1,8 @@
 const config = require('./config.json')
 const Sql = require('./Sql')
 const utils = require('../../utils.txt').bdd
-const table = utils.tables.guild_data
-const fields = table.fields
+const tables = utils.tables
+const fields = tables.fields
 
 let bdd = new Sql()
 
@@ -16,7 +16,7 @@ module.exports = class Config
 
     static getRow(guild)
     {
-        let request = `Select * From ${table.name} Where id=${guild.id}`
+        let request = `Select * From ${tables[0]} Where id=${guild.id}`
         return new Promise((resolve, reject) => {
             bdd.query(request)
             .then((results) => {
@@ -33,7 +33,7 @@ module.exports = class Config
         let tc = this.getChannels(guild, 'text')
         let vc = this.getChannels(guild, 'vocal')
         
-        let request = `Insert Into ${table.name} (${fields[0]}, ${fields[1]}, ${fields[2]}, ${fields[3]})
+        let request = `Insert Into ${tables[0]} (id, name, defaultTextChannel, defaultVocalChannel)
         Values (${guild.id}, '${guild.name}', ${tc[0].id}, ${vc[0].id})`
         
         return new Promise((resolve, reject) => {
@@ -47,7 +47,7 @@ module.exports = class Config
 
     static removeRow(guild)
     {
-        let request = `Delete From ${table.name} Where id=${guild.id}`
+        let request = `Delete From ${tables[0]} Where id=${guild.id}`
         return new Promise((resolve, reject) => {
             bdd.query(request)
             .then((results) => {
@@ -59,7 +59,7 @@ module.exports = class Config
 
     static getDefaultTextChannel(guild)
     {
-        let request = `Select ${fields[2]} From ${table.name} Where id=${guild.id}`
+        let request = `Select defaultTextChannel From ${tables[0]} Where id=${guild.id}`
         return new Promise((resolve, reject) => {
             bdd.query(request)
             .then((results) => {
@@ -73,7 +73,7 @@ module.exports = class Config
 
     static setDefaultTextChannel(guild, value)
     {
-        let request = `Update ${table.name} Set ${fields[2]}=${value.id} Where id=${guild.id}`
+        let request = `Update ${tables[0]} Set defaultTextChannel=${value.id} Where id=${guild.id}`
         return new Promise((resolve, reject) => {
             bdd.query(request)
             .then((results) => {
@@ -86,7 +86,7 @@ module.exports = class Config
 
     static getGreeting(guild)
     {
-        let request = `Select ${fields[4]} From ${table.name} Where id=${guild.id}`
+        let request = `Select greeting From ${tables[0]} Where id=${guild.id}`
         return new Promise((resolve, reject) => {
             bdd.query(request)
             .then((results) => {
@@ -102,7 +102,7 @@ module.exports = class Config
 
     static setGreeting(guild, value)
     {
-        let request = `Update ${table.name} Set ${fields[4]}=${value} Where id=${guild.id}`
+        let request = `Update ${tables[0]} Set greeting=${value} Where id=${guild.id}`
         return new Promise((resolve, reject) => {
             bdd.query(request)
             .then((results) => {
